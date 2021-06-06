@@ -9,9 +9,6 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Catalog App",
-          style: TextStyle(
-            color: Colors.white,
-          ),
         ),
       ),
       body: Center(
@@ -20,7 +17,6 @@ class HomePage extends StatelessWidget {
         ),
       ),
       drawer: MyDrawer(),
-      
     );
   }
 }

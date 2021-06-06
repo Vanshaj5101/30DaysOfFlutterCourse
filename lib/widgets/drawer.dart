@@ -11,7 +11,7 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       elevation: 2,
       child: Container(
-        color: Colors.orange[400],
+        color: Colors.deepPurple,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -20,7 +20,7 @@ class MyDrawer extends StatelessWidget {
               padding: EdgeInsets.zero,
               child: UserAccountsDrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.orange[400],
+                  color: Colors.deepPurple,
                 ),
                 margin: EdgeInsets.zero,
                 accountName: Text(
