@@ -1,5 +1,5 @@
 class Products {
-  final String id;
+  final int id;
   final String productName;
   final String discription;
   final num price;
@@ -15,13 +15,15 @@ class Products {
       required this.imageUrl});
 }
 
-final products = [
-  Products(
-      id: "123abc",
-      productName: "Earphone",
-      discription: "JBL earphone limited edition",
-      price: 300,
-      colorCode: "#33055a",
-      imageUrl:
-          "https://www.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwcd770a25/JBL_TUNE%20115TWS_Product%20Image_Hero_Black.jpg?sw=270&sh=330&sm=fit&sfrm=png")
-];
+class CatalougeModel {
+  static final products = [
+    Products(
+        id: 1,
+        productName: "Earphone",
+        discription: "JBL earphone limited edition",
+        price: 300,
+        colorCode: "#33055a",
+        imageUrl:
+            "https://www.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwcd770a25/JBL_TUNE%20115TWS_Product%20Image_Hero_Black.jpg?sw=270&sh=330&sm=fit&sfrm=png")
+  ];
+}
