@@ -13,17 +13,28 @@ class Products {
       required this.price,
       required this.colorCode,
       required this.imageUrl});
+
+  factory Products.fromJson(Map<dynamic, dynamic> map) {
+    return Products(
+      id: map["id"],
+      productName: map["name"],
+      discription: map["desc"],
+      price: map["price"],
+      colorCode: map["color"],
+      imageUrl: map["image"],
+    );
+  }
+
+  toMap() => {
+        "id": id,
+        "name": productName,
+        "desc": discription,
+        "price": price,
+        "color": colorCode,
+        "image": imageUrl,
+      };
 }
 
 class CatalougeModel {
-  static final products = [
-    Products(
-        id: 1,
-        productName: "Earphone",
-        discription: "JBL earphone limited edition",
-        price: 300,
-        colorCode: "#33055a",
-        imageUrl:
-            "https://www.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwcd770a25/JBL_TUNE%20115TWS_Product%20Image_Hero_Black.jpg?sw=270&sh=330&sm=fit&sfrm=png")
-  ];
+  static List<Products> products = [];
 }
