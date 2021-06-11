@@ -39,8 +39,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: (CatalougeModel.products != null &&
-                  CatalougeModel.products.isNotEmpty)
+          child: (CatalougeModel.products.isNotEmpty)
               ? ListView.builder(
                   itemCount: CatalougeModel.products.length,
                   itemBuilder: (context, index) {
