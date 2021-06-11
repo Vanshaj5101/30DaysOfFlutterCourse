@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 2));
+    //await Future.delayed(Duration(seconds: 2));
     var catalougeJson =
         await rootBundle.loadString("assets/files/catalouge.json");
     var decodedData = jsonDecode(catalougeJson);
@@ -40,13 +40,40 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: (CatalougeModel.products.isNotEmpty)
-              ? ListView.builder(
-                  itemCount: CatalougeModel.products.length,
+              ? GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 15,
+                  ),
                   itemBuilder: (context, index) {
-                    return ProductsWidget(
-                      products: CatalougeModel.products[index],
+                    final product = CatalougeModel.products[index];
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: GridTile(
+                        header: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          child: Text(
+                            product.productName.toString(),
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        child: Image.network(
+                          product.imageUrl,
+                        ),
+                        footer: Text(product.price.toString()),
+                      ),
                     );
                   },
+                  itemCount: CatalougeModel.products.length,
                 )
               : Center(
                   child: CircularProgressIndicator(),
