@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:flutter_catalog/models/catalouge.dart';
-import 'package:flutter_catalog/widgets/drawer.dart';
-import 'package:flutter_catalog/widgets/products_widget.dart';
+import 'package:flutter_catalog/widgets/themes.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -32,53 +31,168 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Catalog App",
+      backgroundColor: MyTheme.creamColor,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CatalougeHeader(),
+                SizedBox(
+                  height: 20,
+                ),
+                if (CatalougeModel.products.isNotEmpty)
+                  Expanded(
+                    child: CatalougeList(),
+                  )
+                else
+                  Center(
+                    child: CircularProgressIndicator(),
+                  )
+              ],
+            ),
+          ),
         ),
       ),
-      body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: (CatalougeModel.products.isNotEmpty)
-              ? GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 15,
+    );
+  }
+}
+
+class CatalougeHeader extends StatelessWidget {
+  const CatalougeHeader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Catalouge App",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: MyTheme.darkBluishColor,
+          ),
+        ),
+        Text(
+          "Trending products",
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: MyTheme.darkBluishColor,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CatalougeList extends StatelessWidget {
+  const CatalougeList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      physics: BouncingScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final catalougeItem = CatalougeModel.products[index];
+        return CatalougeItems(
+          products: catalougeItem,
+        );
+      },
+      itemCount: CatalougeModel.products.length,
+    );
+  }
+}
+
+class CatalougeItems extends StatelessWidget {
+  final Products products;
+
+  const CatalougeItems({Key? key, required this.products}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  child: Image.network(
+                    products.imageUrl,
+                    fit: BoxFit.fill,
                   ),
-                  itemBuilder: (context, index) {
-                    final product = CatalougeModel.products[index];
-                    return Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      products.productName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: MyTheme.darkBluishColor,
+                        fontSize: 15,
                       ),
-                      clipBehavior: Clip.antiAlias,
-                      child: GridTile(
-                        header: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.deepPurple,
+                    ),
+                    Text(
+                      products.discription,
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: MyTheme.darkBluishColor,
+                        fontSize: 10,
+                      ),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "\$ ${products.price.toString()}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: MyTheme.darkBluishColor,
                           ),
-                          padding: const EdgeInsets.all(12),
-                          child: Text(
-                            product.productName.toString(),
-                            style: TextStyle(
-                              color: Colors.white,
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                              MyTheme.darkBluishColor,
+                            ),
+                            shape: MaterialStateProperty.all(
+                              StadiumBorder(),
                             ),
                           ),
+                          onPressed: () {},
+                          child: Text("Buy"),
                         ),
-                        child: Image.network(
-                          product.imageUrl,
-                        ),
-                        footer: Text(product.price.toString()),
-                      ),
-                    );
-                  },
-                  itemCount: CatalougeModel.products.length,
-                )
-              : Center(
-                  child: CircularProgressIndicator(),
-                )),
-      drawer: MyDrawer(),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
     );
   }
 }
