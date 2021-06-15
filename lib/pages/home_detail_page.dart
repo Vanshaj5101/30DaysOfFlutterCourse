@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_catalog/models/catalouge.dart';
@@ -12,8 +13,14 @@ class HomeDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: MyTheme.darkBluishColor,
+        ),
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
@@ -23,7 +30,11 @@ class HomeDetailsPage extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(8, 20, 8, 8),
                 child: Hero(
                   tag: item.id.toString(),
-                  child: Image.network(item.imageUrl),
+                  child: Container(
+                    height: height * 0.4,
+                    width: width,
+                    child: Image.network(item.imageUrl),
+                  ),
                 ),
               ),
             ),
@@ -36,29 +47,34 @@ class HomeDetailsPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Center(
-                          child: Text(
-                            item.productName,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: MyTheme.darkBluishColor,
-                              fontSize: 40,
-                            ),
+                        Text(
+                          item.productName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: MyTheme.darkBluishColor,
+                            fontSize: 40,
                           ),
                         ),
-                        Center(
-                          child: Text(
-                            item.discription,
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: MyTheme.darkBluishColor,
-                              fontSize: 18,
-                            ),
+                        Text(
+                          item.discription,
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            color: MyTheme.darkBluishColor,
+                            fontSize: 18,
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(14.0),
+                          child: Text(
+                            "dataDiam sed ipsum sit amet elitr. Vero tempor amet sed diam eos sed no lorem amet. Ea kasd elitr consetetur eirmod dolor eirmod et labore. Ipsum et sed ipsum no.",
+                            style: TextStyle(
+                              color: MyTheme.darkBluishColor,
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ],
@@ -68,6 +84,7 @@ class HomeDetailsPage extends StatelessWidget {
           ],
         ),
       ),
+      
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ButtonBar(
