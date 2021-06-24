@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_catalog/models/catalouge.dart';
 import 'package:flutter_catalog/pages/home_detail_page.dart';
 
-import 'package:flutter_catalog/widgets/themes.dart';
 
 class CatalougeList extends StatelessWidget {
   const CatalougeList({Key? key}) : super(key: key);
@@ -58,6 +57,7 @@ class CatalougeItems extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
+                    //color: Theme.of(context).canvasColor,
                     height: 150,
                     width: 150,
                     child: Image.network(
@@ -79,7 +79,7 @@ class CatalougeItems extends StatelessWidget {
                       products.productName,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: MyTheme.darkBluishColor,
+                        color: Theme.of(context).accentColor,
                         fontSize: 15,
                       ),
                     ),
@@ -87,7 +87,7 @@ class CatalougeItems extends StatelessWidget {
                       products.discription,
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
-                        color: MyTheme.darkBluishColor,
+                        color: Theme.of(context).accentColor,
                         fontSize: 10,
                       ),
                     ),
@@ -98,13 +98,13 @@ class CatalougeItems extends StatelessWidget {
                           "\$ ${products.price.toString()}",
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
-                            color: MyTheme.darkBluishColor,
+                            color: Theme.of(context).accentColor,
                           ),
                         ),
                         ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(
-                              MyTheme.darkBluishColor,
+                              Theme.of(context).buttonColor,
                             ),
                             shape: MaterialStateProperty.all(
                               StadiumBorder(),
@@ -122,7 +122,7 @@ class CatalougeItems extends StatelessWidget {
           ),
         ),
         decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(20),
         ),
       ),

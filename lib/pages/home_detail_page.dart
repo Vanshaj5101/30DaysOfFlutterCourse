@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_catalog/models/catalouge.dart';
-import 'package:flutter_catalog/widgets/themes.dart';
 
 class HomeDetailsPage extends StatelessWidget {
   final Products item;
@@ -16,12 +15,8 @@ class HomeDetailsPage extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: MyTheme.darkBluishColor,
-        ),
-      ),
-      backgroundColor: Colors.white,
+      appBar: AppBar(),
+      backgroundColor: Theme.of(context).cardColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -54,7 +49,7 @@ class HomeDetailsPage extends StatelessWidget {
                           item.productName,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: MyTheme.darkBluishColor,
+                            color: Theme.of(context).accentColor,
                             fontSize: 40,
                           ),
                         ),
@@ -62,7 +57,7 @@ class HomeDetailsPage extends StatelessWidget {
                           item.discription,
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
-                            color: MyTheme.darkBluishColor,
+                            color: Theme.of(context).accentColor,
                             fontSize: 18,
                           ),
                         ),
@@ -71,7 +66,7 @@ class HomeDetailsPage extends StatelessWidget {
                           child: Text(
                             "dataDiam sed ipsum sit amet elitr. Vero tempor amet sed diam eos sed no lorem amet. Ea kasd elitr consetetur eirmod dolor eirmod et labore. Ipsum et sed ipsum no.",
                             style: TextStyle(
-                              color: MyTheme.darkBluishColor,
+                              color: Theme.of(context).accentColor,
                             ),
                           ),
                         )
@@ -84,7 +79,6 @@ class HomeDetailsPage extends StatelessWidget {
           ],
         ),
       ),
-      
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ButtonBar(
@@ -101,7 +95,7 @@ class HomeDetailsPage extends StatelessWidget {
             ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                  MyTheme.darkBluishColor,
+                  Theme.of(context).buttonColor,
                 ),
                 shape: MaterialStateProperty.all(
                   StadiumBorder(),

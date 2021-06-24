@@ -35,10 +35,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).canvasColor,
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FloatingActionButton(
-          backgroundColor: MyTheme.darkBluishColor,
+          backgroundColor: Theme.of(context).buttonColor,
           onPressed: () {
             Navigator.pushNamed(
               context,
@@ -51,7 +52,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      backgroundColor: MyTheme.creamColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
