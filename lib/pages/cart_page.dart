@@ -56,7 +56,13 @@ class CartTotal extends StatelessWidget {
                 Theme.of(context).buttonColor,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Buy option is not supported yet :("),
+                ),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -95,7 +101,7 @@ class _CartListState extends State<CartList> {
             onPressed: () {},
             icon: Icon(
               CupertinoIcons.delete,
-              color: Theme.of(context).buttonColor,
+              color: Theme.of(context).accentColor,
             ),
           ),
           title: Text(

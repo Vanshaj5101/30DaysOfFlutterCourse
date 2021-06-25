@@ -12,7 +12,7 @@ class CatalougeList extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final catalougeItem = CatalougeModel.getByPosi(index);
+        final catalougeItem = CatalougeModel.products[index];
         return InkWell(
           onTap: () {
             Navigator.push(

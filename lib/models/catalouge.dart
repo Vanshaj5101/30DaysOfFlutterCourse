@@ -38,7 +38,7 @@ class Products {
 class CatalougeModel {
   static List<Products> products = [];
 
-  static Products getById(int id) =>
+  Products getById(int id) =>
       products.firstWhere((element) => element.id == id, orElse: null);
-  static Products getByPosi(int posi) => products[posi];
+  Products getByPosi(int posi) => products[posi];
 }
