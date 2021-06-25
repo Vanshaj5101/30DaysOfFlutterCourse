@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_catalog/models/catalouge.dart';
 import 'package:flutter_catalog/pages/home_detail_page.dart';
 
-
 class CatalougeList extends StatelessWidget {
   const CatalougeList({Key? key}) : super(key: key);
 
@@ -13,7 +12,7 @@ class CatalougeList extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        final catalougeItem = CatalougeModel.products[index];
+        final catalougeItem = CatalougeModel.getByPosi(index);
         return InkWell(
           onTap: () {
             Navigator.push(
