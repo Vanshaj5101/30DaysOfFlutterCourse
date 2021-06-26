@@ -95,29 +95,41 @@ class _CartListState extends State<CartList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _cart.products.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: Icon(
-            Icons.done,
-            color: Theme.of(context).accentColor,
-          ),
-          trailing: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              CupertinoIcons.delete,
-              color: Theme.of(context).accentColor,
+    return _cart.products.isEmpty
+        ? Center(
+            child: Text(
+              "Cart is Empty :(",
+              style: Theme.of(context).textTheme.headline4!.copyWith(
+                    color: Theme.of(context).accentColor,
+                  ),
             ),
-          ),
-          title: Text(
-            _cart.products[index].productName,
-            style: TextStyle(
-              color: Theme.of(context).accentColor,
-            ),
-          ),
-        );
-      },
-    );
+          )
+        : ListView.builder(
+            itemCount: _cart.products.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: Icon(
+                  Icons.done,
+                  color: Theme.of(context).accentColor,
+                ),
+                trailing: IconButton(
+                  onPressed: () {
+                    _cart.removeProduct(_cart.products[index]);
+                    setState(() {});
+                  },
+                  icon: Icon(
+                    CupertinoIcons.delete,
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+                title: Text(
+                  _cart.products[index].productName,
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+              );
+            },
+          );
   }
 }
