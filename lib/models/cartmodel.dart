@@ -1,9 +1,15 @@
 import 'package:flutter_catalog/models/catalouge.dart';
 
 class CartModel {
+  static final cartModel = CartModel._internal();
+
+  CartModel._internal();
+
+  factory CartModel() => cartModel;
+
   CatalougeModel _catalougeModel = CatalougeModel();
 
-  final List<int> _itemIDs = [];
+  final List<int> itemIDs = [];
 
   CatalougeModel get catalougeModel => _catalougeModel;
   set catalougeModel(CatalougeModel newCatalouge) {
@@ -12,7 +18,7 @@ class CartModel {
 
   // get items in cart
   List<Products> get products =>
-      _itemIDs.map((id) => _catalougeModel.getById(id)).toList();
+      itemIDs.map((id) => _catalougeModel.getById(id)).toList();
 
   // get total price
   num get totalPrice =>
@@ -20,11 +26,11 @@ class CartModel {
 
   // add item in cart
   void addProduct(Products product) {
-    _itemIDs.add(product.id);
+    itemIDs.add(product.id);
   }
 
   // remove elemnt in cart
   void removeProduct(Products product) {
-    _itemIDs.remove(product.id);
+    itemIDs.remove(product.id);
   }
 }
