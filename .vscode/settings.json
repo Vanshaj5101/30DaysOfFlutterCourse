@@ -1,0 +1,22 @@
+{
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace",
+        "gitlens.codeLens.scopes": [
+            "document"
+        ]
+    },
+    "dart.flutterCustomEmulators": [
+        {
+            "id": "Pixel_4_API_30",
+            "name": "Pixel 4 API 30",
+            "executable": "~/home/vanshaj/Android/Sdk/emulator/emulator",
+            "args": [
+                "-avd",
+                "Pixel_4_API_30",
+            ]
+        }
+    ]
+}
