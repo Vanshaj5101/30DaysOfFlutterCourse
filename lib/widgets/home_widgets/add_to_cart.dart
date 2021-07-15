@@ -35,11 +35,9 @@ class _AddToCartState extends State<AddToCart> {
       ),
       onPressed: () {
         if (!isInCart) {
-          cartIcon = myProvider.changeIcon(widget.products);
           isInCart = !isInCart;
 
-          myProvider.cart.catalougeModel = myProvider.catalougeModel;
-          myProvider.cart.addProduct(widget.products);
+          myProvider.addCartProduct(widget.products);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).buttonColor,

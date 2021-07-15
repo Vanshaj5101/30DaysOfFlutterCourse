@@ -115,8 +115,8 @@ class _CartListState extends State<CartList> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    myProvider.cart
-                        .removeProduct(myProvider.cart.products[index]);
+                    myProvider
+                        .removeCartProduct(myProvider.cart.products[index]);
                   },
                   icon: Icon(
                     CupertinoIcons.delete,
