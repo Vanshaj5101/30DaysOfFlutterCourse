@@ -1,20 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_catalog/models/catalouge.dart';
+import 'package:flutter_catalog/models/provider_class.dart';
 
 class CartModel {
-  static final cartModel = CartModel._internal();
-
-  CartModel._internal();
-
-  factory CartModel() => cartModel;
-
   CatalougeModel _catalougeModel = CatalougeModel();
 
   final List<int> itemIDs = [];
-
-  CatalougeModel get catalougeModel => _catalougeModel;
-  set catalougeModel(CatalougeModel newCatalouge) {
-    _catalougeModel = newCatalouge;
-  }
 
   // get items in cart
   List<Products> get products =>
@@ -25,12 +16,14 @@ class CartModel {
       products.fold(0, (total, current) => total + current.price);
 
   // add item in cart
-  void addProduct(Products product) {
-    itemIDs.add(product.id);
-  }
+  // void addProduct(Products product) {
+  //   itemIDs.add(product.id);
+
+  // }
 
   // remove elemnt in cart
-  void removeProduct(Products product) {
-    itemIDs.remove(product.id);
-  }
+  // void removeProduct(Products product) {
+  //   itemIDs.remove(product.id);
+
+  // }
 }

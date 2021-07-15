@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_catalog/models/cartmodel.dart';
+import 'package:flutter_catalog/models/catalouge.dart';
+import 'package:flutter_catalog/models/provider_class.dart';
+import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -39,7 +41,7 @@ class CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _cart = CartModel();
+    final myProvider = Provider.of<ProvideClass>(context);
 
     return SizedBox(
       height: 200,
@@ -47,7 +49,7 @@ class CartTotal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
-            "\$${_cart.totalPrice}",
+            "\$${myProvider.cart.totalPrice}",
             style: Theme.of(context).textTheme.headline4!.copyWith(
                   color: Theme.of(context).accentColor,
                 ),
@@ -91,11 +93,10 @@ class CartList extends StatefulWidget {
 }
 
 class _CartListState extends State<CartList> {
-  final _cart = CartModel();
-
   @override
   Widget build(BuildContext context) {
-    return _cart.products.isEmpty
+    final myProvider = Provider.of<ProvideClass>(context);
+    return myProvider.cart.products.isEmpty
         ? Center(
             child: Text(
               "Cart is Empty :(",
@@ -105,7 +106,7 @@ class _CartListState extends State<CartList> {
             ),
           )
         : ListView.builder(
-            itemCount: _cart.products.length,
+            itemCount: myProvider.cart.products.length,
             itemBuilder: (context, index) {
               return ListTile(
                 leading: Icon(
@@ -114,8 +115,8 @@ class _CartListState extends State<CartList> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    _cart.removeProduct(_cart.products[index]);
-                    setState(() {});
+                    myProvider
+                        .removeCartProduct(myProvider.cart.products[index]);
                   },
                   icon: Icon(
                     CupertinoIcons.delete,
@@ -123,7 +124,7 @@ class _CartListState extends State<CartList> {
                   ),
                 ),
                 title: Text(
-                  _cart.products[index].productName,
+                  myProvider.cart.products[index].productName,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                   ),
