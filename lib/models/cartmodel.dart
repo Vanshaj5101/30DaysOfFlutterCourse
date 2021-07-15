@@ -1,12 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_catalog/models/catalouge.dart';
+import 'package:provider/provider.dart';
 
 class CartModel {
-  static final cartModel = CartModel._internal();
-
-  CartModel._internal();
-
-  factory CartModel() => cartModel;
-
   CatalougeModel _catalougeModel = CatalougeModel();
 
   final List<int> itemIDs = [];
@@ -33,4 +29,6 @@ class CartModel {
   void removeProduct(Products product) {
     itemIDs.remove(product.id);
   }
+
+  
 }

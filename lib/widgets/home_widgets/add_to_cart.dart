@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_catalog/models/cartmodel.dart';
 import 'package:flutter_catalog/models/catalouge.dart';
+import 'package:flutter_catalog/models/provider_class.dart';
+import 'package:provider/provider.dart';
 
 class AddToCart extends StatefulWidget {
   final Products products;
@@ -15,10 +16,13 @@ class AddToCart extends StatefulWidget {
 }
 
 class _AddToCartState extends State<AddToCart> {
-  final _cart = CartModel();
+  Icon cartIcon = Icon(CupertinoIcons.cart_badge_plus);
+
   @override
   Widget build(BuildContext context) {
-    bool isInCart = _cart.products.contains(widget.products);
+    final myProvider = Provider.of<ProvideClass>(context);
+
+    bool isInCart = myProvider.cart.products.contains(widget.products);
 
     return ElevatedButton(
       style: ButtonStyle(
@@ -31,11 +35,20 @@ class _AddToCartState extends State<AddToCart> {
       ),
       onPressed: () {
         if (!isInCart) {
+          cartIcon = myProvider.changeIcon(widget.products);
           isInCart = !isInCart;
-          final _catalouge = CatalougeModel();
-          _cart.catalougeModel = _catalouge;
-          _cart.addProduct(widget.products);
-          setState(() {});
+
+          myProvider.cart.catalougeModel = myProvider.catalougeModel;
+          myProvider.cart.addProduct(widget.products);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Theme.of(context).buttonColor,
+              content: Text(
+                "Already added to cart.",
+                style: Theme.of(context).textTheme.button!.copyWith(
+                      color: Colors.white,
+                    ),
+              )));
         }
       },
       child: isInCart ? Icon(Icons.done) : Icon(CupertinoIcons.cart_badge_plus),

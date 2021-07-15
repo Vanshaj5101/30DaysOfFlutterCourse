@@ -36,12 +36,6 @@ class Products {
 }
 
 class CatalougeModel {
-  static final catModel = CatalougeModel._internal();
-
-  CatalougeModel._internal();
-
-  factory CatalougeModel() => catModel;
-
   static List<Products> products = [];
 
   Products getById(int id) =>
