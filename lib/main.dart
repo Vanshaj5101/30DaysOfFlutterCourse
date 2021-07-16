@@ -16,20 +16,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ProvideClass(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        //home: HomePage(),
-        themeMode: ThemeMode.system,
-        theme: MyTheme.lightTheme(context),
+      child: Consumer<ProvideClass>(
+        builder: (context, myProvider, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            //home: HomePage(),
+            //themeMode: ThemeMode.dark,
+            themeMode: myProvider.isDark ? ThemeMode.dark : ThemeMode.light,
+            theme: MyTheme.lightTheme(context),
 
-        darkTheme: MyTheme.darkTheme(context),
-        initialRoute: MyRoutes.homeRoute,
-        routes: {
-          "/": (context) => LoginPage(),
-          MyRoutes.homeRoute: (context) => HomePage(),
-          MyRoutes.loginRoute: (context) => LoginPage(),
-          //MyRoutes.homeDetailsRoute: (context) => HomeDetailsPage(item: item),
-          MyRoutes.cartRoute: (context) => CartPage(),
+            darkTheme: MyTheme.darkTheme(context),
+            initialRoute: MyRoutes.loginRoute,
+            routes: {
+              "/": (context) => LoginPage(),
+              MyRoutes.homeRoute: (context) => HomePage(),
+              MyRoutes.loginRoute: (context) => LoginPage(),
+              //MyRoutes.homeDetailsRoute: (context) => HomeDetailsPage(item: item),
+              MyRoutes.cartRoute: (context) => CartPage(),
+            },
+          );
         },
       ),
     );

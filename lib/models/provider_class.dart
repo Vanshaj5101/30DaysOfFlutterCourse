@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_catalog/models/cartmodel.dart';
 import 'package:flutter_catalog/models/catalouge.dart';
 
-
 class ProvideClass with ChangeNotifier {
   final cart = CartModel();
   final catalougeModel = CatalougeModel();
   Icon icon = Icon(CupertinoIcons.cart_badge_plus);
   late Products providerProduct;
+  bool isDark = false;
 
   // Icon changeIcon(Products products) {
   //   providerProduct = products;
@@ -26,9 +26,14 @@ class ProvideClass with ChangeNotifier {
 
     notifyListeners();
   }
+
   void addCartProduct(Products products) {
     cart.itemIDs.add(products.id);
     notifyListeners();
   }
-}
 
+  void toggleState() {
+    isDark = !isDark;
+    notifyListeners();
+  }
+}
