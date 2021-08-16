@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_catalog/models/catalouge.dart';
-import 'package:flutter_catalog/models/provider_class.dart';
 
 class CartModel {
   CatalougeModel _catalougeModel = CatalougeModel();
