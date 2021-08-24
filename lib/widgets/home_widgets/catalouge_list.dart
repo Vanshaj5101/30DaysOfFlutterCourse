@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:loading_gifs/loading_gifs.dart';
 import 'package:flutter_catalog/models/catalouge.dart';
 import 'package:flutter_catalog/pages/home_detail_page.dart';
 
@@ -62,10 +62,23 @@ class CatalougeItems extends StatelessWidget {
                     //color: Theme.of(context).canvasColor,
                     height: 150,
                     width: 150,
-                    child: Image.network(
-                      products.imageUrl,
-                      fit: BoxFit.fill,
+                    child: FadeInImage.assetNetwork(
+                      placeholder: cupertinoActivityIndicatorSmall,
+                      image: products.imageUrl,
                     ),
+                    // Image.network(products.imageUrl, fit: BoxFit.fill,
+                    //     loadingBuilder: (BuildContext context, Widget child,
+                    //         ImageChunkEvent? loadingProgress) {
+                    //   if (loadingProgress == null) {
+                    //     return child;
+                    //   } else {
+                    //     return Center(
+                    //       child: CircularProgressIndicator(
+                    //         color: Theme.of(context).buttonColor,
+                    //       ),
+                    //     );
+                    //   }
+                    // }),
                   ),
                 ),
               ),
